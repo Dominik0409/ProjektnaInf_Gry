@@ -7,7 +7,7 @@ W, H = 1000, 1000
 
 class Jablko():
     def __init__(self, parent_screen):
-        self.jablko = pygame.image.load("jablko.png").convert()
+        self.jablko = pygame.image.load("zasoby\grafika\jablko.png").convert()
         self.parent_screen = parent_screen
         self.x = rozmiar * 4
         self.y = rozmiar * 4
@@ -22,7 +22,7 @@ class Jablko():
 
 class Banan():
     def __init__(self, parent_screen):
-        self.banan = pygame.image.load("banan.png").convert()
+        self.banan = pygame.image.load("zasoby\grafika\snakeskin.png").convert()
         self.parent_screen = parent_screen
         self.x = rozmiar * 7
         self.y = rozmiar * 7
@@ -42,7 +42,7 @@ class Snake():
     def __init__(self, parent_screen, dlugosc):
         self.dlugosc = dlugosc
         self.parent_screen = parent_screen
-        self.klocek = pygame.image.load("snakeskin1.png").convert()
+        self.klocek = pygame.image.load("zasoby\grafika\snakeskin1.png").convert()
         self.x = [rozmiar]*dlugosc
         self.y = [rozmiar]*dlugosc
         self.kierunek = 'dol'
@@ -108,11 +108,11 @@ class Game():
         return False
 
     def dzwiek(self, sound):
-        sound = pygame.mixer.Sound(f"{sound}.mp3")
+        sound = pygame.mixer.Sound(f"zasoby\muzyka\{sound}.mp3")
         pygame.mixer.Sound.play(sound)
         
     def render_bg(self):
-        bg = pygame.image.load("plansza.png")
+        bg = pygame.image.load("zasoby\grafika\plansza.png")
         self.gra.window.blit(bg, (0,0))
 
     def play(self):
@@ -145,17 +145,12 @@ class Game():
             raise "Game over"
 
     def Wynik(self):
-        font = pygame.font.SysFont('arial',30)
-        wynik = font.render(f"Wynik: {self.snake.dlugosc}", True, (200, 200 ,200))
-        self.gra.window.blit(wynik, (800,10))
+        self.gra.draw_text(f"Wynik: {self.snake.dlugosc-5}", 30, 800, 10, self.gra.BLACK)
 
     def gameover(self):
-        self.gra.window.fill((255, 255, 255))
-        font = pygame.font.SysFont('arial', 30)
-        linia1 = font.render(f"Koniec gry! Wynik: {self.snake.dlugosc}", True, (200, 200 ,200))
-        self.gra.window.blit(linia1, (200, 300))
-        linia2 = font.render(f"Aby zagrać jeszcze raz kliknij Enter", True, (200, 200, 200))
-        self.gra.window.blit(linia2, (200, 350))
+        self.gra.window.fill((self.gra.WHITE))
+        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, self.gra.DIS_W/2, self.gra.DIS_H/2, self.gra.BLACK)
+        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  30, self.gra.DIS_W/2, self.gra.DIS_H/2 + 50, self.gra.BLACK)
         pygame.display.flip()
 
     def reset(self):
@@ -204,6 +199,6 @@ class Game():
 
 
 
-if __name__ == "__main__":
-    game = Game()
-    game.run()
+# if __name__ == "__main__":
+#     game = Game()
+#     game.run()

@@ -12,7 +12,7 @@ class Gra():
         self.DIS_W, self.DIS_H = 1000, 1000
         self.display = pygame.Surface((self.DIS_W,self.DIS_H))
         self.window = pygame.display.set_mode(((self.DIS_W,self.DIS_H)))
-        self.font = '8-BIT WONDER.TTF'
+        self.font = 'zasoby\czcionki\8-BIT WONDER.TTF'
         self.BLACK, self.WHITE = (0,0,0) , (255,255,255)
         self.curr_menu = MainMenu(self)
         self.GraSnake = Game(self)
@@ -43,7 +43,7 @@ class Gra():
     def reset_keys(self):
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
         
-    def draw_text(self, text, size, x, y,color):
+    def draw_text(self, text, size, x, y, color):
         font = pygame.font.Font(self.font, size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
