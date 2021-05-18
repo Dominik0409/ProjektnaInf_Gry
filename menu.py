@@ -30,7 +30,7 @@ class MainMenu(Menu):
         while self.run_display:
             self.gra.check_events()
             self.check_input()
-            bg = pygame.image.load('bg1.jpg')
+            bg = pygame.image.load('zasoby\grafika\bg1.jpg')
             self.gra.display.blit(bg, (0,0))
             self.gra.draw_text('Wybierz gre', 70, 100, 100, self.gra.PURPLE)
             self.gra.draw_text('Snake', 40, self.snakex,self.snakey, self.gra.PURPLE)

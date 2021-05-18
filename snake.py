@@ -21,7 +21,7 @@ class Jablko():
 
 class Banan():
     def __init__(self, parent_screen):
-        self.banan = pygame.image.load('b.png').convert()
+        self.banan = pygame.image.load('zasoby\grafika\b.png').convert()
         self.parent_screen = parent_screen
         self.x = rozmiar * 15
         self.y = rozmiar * 15
