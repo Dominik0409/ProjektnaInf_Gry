@@ -13,7 +13,7 @@ class Gra():
         self.display = pygame.Surface((self.DIS_W,self.DIS_H))
         self.window = pygame.display.set_mode(((self.DIS_W,self.DIS_H)))
         self.font = 'zasoby\czcionki\8-BIT WONDER.TTF'
-        self.BLACK, self.WHITE = (0,0,0) , (255,255,255)
+        self.BLACK, self.WHITE, self.PURPLE = (0,0,0) , (255,255,255) , (119,65,235)
         self.curr_menu = MainMenu(self)
         self.GraSnake = Game(self)
         
@@ -44,12 +44,18 @@ class Gra():
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
         
     def draw_text(self, text, size, x, y, color):
-        font = pygame.font.Font(self.font, size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
-        self.display.blit(text_surface,text_rect)
-        self.window.blit(text_surface,text_rect)   
+        font_1 = pygame.font.Font(self.font, size)
+        text_surface_1 = font_1.render(text, True, self.BLACK)
+        text_rect_1 = text_surface_1.get_rect()
+        text_rect_1.topleft = (x+5,y+5)
+        font_2 = pygame.font.Font(self.font, size)
+        text_surface_2 = font_2.render(text, True, color)
+        text_rect_2 = text_surface_2.get_rect()
+        text_rect_2.topleft = (x,y)
+        self.display.blit(text_surface_1,text_rect_1)
+        self.window.blit(text_surface_1,text_rect_1)
+        self.display.blit(text_surface_2,text_rect_2)
+        self.window.blit(text_surface_2,text_rect_2)  
                 
                 
                 

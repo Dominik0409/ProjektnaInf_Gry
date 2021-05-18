@@ -14,7 +14,6 @@ class Jablko():
 
     def rysuj(self):
         self.parent_screen.blit(self.jablko, (self.x, self.y))
-        pygame.display.flip()
 
     def move(self):
         self.x = random.randint(0,(W/rozmiar)-1) * rozmiar
@@ -22,14 +21,13 @@ class Jablko():
 
 class Banan():
     def __init__(self, parent_screen):
-        self.banan = pygame.image.load("zasoby\grafika\snakeskin.png").convert()
+        self.banan = pygame.image.load('b.png').convert()
         self.parent_screen = parent_screen
-        self.x = rozmiar * 7
-        self.y = rozmiar * 7
+        self.x = rozmiar * 15
+        self.y = rozmiar * 15
 
     def rysuj(self):
         self.parent_screen.blit(self.banan, (self.x, self.y))
-        pygame.display.flip()
 
     def move(self):
         self.x = random.randint(0,(W/rozmiar)-1) * rozmiar
@@ -42,7 +40,7 @@ class Snake():
     def __init__(self, parent_screen, dlugosc):
         self.dlugosc = dlugosc
         self.parent_screen = parent_screen
-        self.klocek = pygame.image.load("zasoby\grafika\snakeskin1.png").convert()
+        self.klocek = pygame.image.load("zasoby\grafika\snakeskin3.png").convert()
         self.x = [rozmiar]*dlugosc
         self.y = [rozmiar]*dlugosc
         self.kierunek = 'dol'
@@ -50,12 +48,11 @@ class Snake():
     def rysuj(self):
         for i in range(self.dlugosc):
             self.parent_screen.blit(self.klocek, (self.x[i], self.y[i]))
-        pygame.display.flip()
 
     def pow_rozmiar(self):
         self.dlugosc += 1
-        self.x.append(-1)
-        self.y.append(-1)
+        self.x.append(-25)
+        self.y.append(-25)
 
     def ruch_lewo(self):
         self.kierunek = 'lewo'
@@ -112,7 +109,7 @@ class Game():
         pygame.mixer.Sound.play(sound)
         
     def render_bg(self):
-        bg = pygame.image.load("zasoby\grafika\plansza.png")
+        bg = pygame.image.load("bg3.jpg")
         self.gra.window.blit(bg, (0,0))
 
     def play(self):
@@ -121,7 +118,7 @@ class Game():
         self.jablko.rysuj()
         self.banan.rysuj()
         self.Wynik()
-        pygame.display.flip()
+        self.Predkosc()
 
         if self.Kolizja(self.snake.x[0],self.snake.y[0],self.jablko.x,self.jablko.y):
             self.dzwiek("am")
@@ -130,7 +127,7 @@ class Game():
             
         if self.Kolizja(self.snake.x[0],self.snake.y[0],self.banan.x,self.banan.y):
             self.dzwiek("am")
-            for i in range (1,10):
+            for i in range (0,3):
                 self.snake.pow_rozmiar()
             self.banan.move()
             self.FPS += 1
@@ -145,18 +142,24 @@ class Game():
             raise "Game over"
 
     def Wynik(self):
-        self.gra.draw_text(f"Wynik: {self.snake.dlugosc-5}", 30, 800, 10, self.gra.BLACK)
+        self.gra.draw_text(f"Wynik {self.snake.dlugosc-5}", 30, 650, 10, self.gra.WHITE)
+        pygame.display.flip()
+        
+    def Predkosc(self):
+        self.gra.draw_text(f"Predkosc {self.FPS}", 30, 650, 50, self.gra.WHITE)
+        pygame.display.flip()
 
     def gameover(self):
-        self.gra.window.fill((self.gra.WHITE))
-        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, self.gra.DIS_W/2, self.gra.DIS_H/2, self.gra.BLACK)
-        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  30, self.gra.DIS_W/2, self.gra.DIS_H/2 + 50, self.gra.BLACK)
+        self.gra.window.blit(pygame.image.load("bg4.jpg"), (0,0))
+        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, 200, self.gra.DIS_H/2, self.gra.WHITE)
+        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  30, 20, self.gra.DIS_H/2 + 50, self.gra.WHITE)
         pygame.display.flip()
 
     def reset(self):
         self.snake = Snake(self.gra.window, 5)
         self.jablko = Jablko(self.gra.window)
         self.banan = Banan(self.gra.window)
+        self.FPS = 15
 
 
     def run(self):
@@ -192,7 +195,7 @@ class Game():
             try:
                 if not pause:
                     self.play()
-            except Exception as e:
+            except Exception:
                 self.gameover()
                 pause = True
                 self.reset()
