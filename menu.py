@@ -15,7 +15,7 @@ class Menu():
         self.gra.window.blit(self.gra.display, (0,0))
         pygame.display.update()
         self.gra.reset_keys()
-        
+#klasa menu glownego        
 class MainMenu(Menu):
     def __init__(self,gra):
         Menu.__init__(self, gra)
@@ -38,7 +38,7 @@ class MainMenu(Menu):
             self.gra.draw_text('Warcaby', 40, self.warcabyx,self.warcabyy, self.gra.PURPLE)
             self.draw_cursor()
             self.blit_screen()
-            
+# ruch kursora po menu            
     def move_cursor(self):
         if self.gra.DOWN_KEY:
             if self.state == 'Snake':
@@ -61,7 +61,7 @@ class MainMenu(Menu):
             elif self.state == 'Warcaby':
                 self.cursor_rect.midtop= (self.kikx + self.offset, self. kiky)
                 self.state = 'Kolko i krzyzyk'
-                
+# wcisniecie klawisza enter powoduje wybranie gry             
     def check_input(self):
         self.move_cursor()
         if self.gra.START_KEY:

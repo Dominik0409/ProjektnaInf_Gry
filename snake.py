@@ -5,20 +5,23 @@ from pygame.locals import *
 rozmiar = 25
 W, H = 1000, 1000
 
+#klasa jablko - dodaje 1 pkt dlugosci i 0 predkosci
 class Jablko():
     def __init__(self, parent_screen):
         self.jablko = pygame.image.load("jablko.png").convert()
         self.parent_screen = parent_screen
+#pozycja startowa jablka
         self.x = rozmiar * 4
         self.y = rozmiar * 4
-
+#funkcja rysujaca na ekranie jablko
     def rysuj(self):
         self.parent_screen.blit(self.jablko, (self.x, self.y))
-
+#funkcja ustalajaca nowe polozenie jablka
     def move(self):
         self.x = random.randint(0,(W/rozmiar)-1) * rozmiar
         self.y = random.randint(0,(H/rozmiar)-1) * rozmiar
 
+#klasa banan - dodaje 3 pkt dlugoscii zwieksza predkosc
 class Banan():
     def __init__(self, parent_screen):
         self.banan = pygame.image.load("b.png").convert()
@@ -53,7 +56,7 @@ class Snake():
         self.dlugosc += 1
         self.x.append(-25)
         self.y.append(-25)
-
+#funkcje zmieniajace obecny kierunek poruszania
     def ruch_lewo(self):
         self.kierunek = 'lewo'
 
@@ -67,11 +70,11 @@ class Snake():
         self.kierunek = 'dol'
 
     def ruch(self):
-
+#od końca do początku każdy klocek dostaje współrzędne klocka przed nim
         for i in range(self.dlugosc-1,0,-1):
             self.x[i] = self.x[i-1]
             self.y[i] = self.y[i-1]
-
+#klocek 'glowy' dostaje nowe wsp. w zależnosci od aktualnej zmiennej kierunek
         if self.kierunek == 'gora':
             self.y[0] -= 25
         if self.kierunek == 'dol':
