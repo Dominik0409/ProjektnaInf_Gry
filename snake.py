@@ -7,7 +7,7 @@ W, H = 1000, 1000
 
 class Jablko():
     def __init__(self, parent_screen):
-        self.jablko = pygame.image.load("zasoby\grafika\jablko.png").convert()
+        self.jablko = pygame.image.load("jablko.png").convert()
         self.parent_screen = parent_screen
         self.x = rozmiar * 4
         self.y = rozmiar * 4
@@ -21,7 +21,7 @@ class Jablko():
 
 class Banan():
     def __init__(self, parent_screen):
-        self.banan = pygame.image.load('zasoby\grafika\b.png').convert()
+        self.banan = pygame.image.load("b.png").convert()
         self.parent_screen = parent_screen
         self.x = rozmiar * 15
         self.y = rozmiar * 15
@@ -40,7 +40,7 @@ class Snake():
     def __init__(self, parent_screen, dlugosc):
         self.dlugosc = dlugosc
         self.parent_screen = parent_screen
-        self.klocek = pygame.image.load("zasoby\grafika\snakeskin3.png").convert()
+        self.klocek = pygame.image.load("snakeskin3.png").convert()
         self.x = [rozmiar]*dlugosc
         self.y = [rozmiar]*dlugosc
         self.kierunek = 'dol'
@@ -105,7 +105,7 @@ class Game():
         return False
 
     def dzwiek(self, sound):
-        sound = pygame.mixer.Sound(f"zasoby\muzyka\{sound}.mp3")
+        sound = pygame.mixer.Sound(f"{sound}.mp3")
         pygame.mixer.Sound.play(sound)
         
     def render_bg(self):
@@ -119,6 +119,18 @@ class Game():
         self.banan.rysuj()
         self.Wynik()
         self.Predkosc()
+        
+        if self.snake.x[0] >= W:
+            self.snake.x[0] -= 1000
+            
+        if self.snake.x[0] < 0:
+            self.snake.x[0] += 1000
+            
+        if self.snake.y[0] >= H:
+            self.snake.y[0] -= 1000
+            
+        if self.snake.y[0] < 0:
+            self.snake.y[0] += 1000
 
         if self.Kolizja(self.snake.x[0],self.snake.y[0],self.jablko.x,self.jablko.y):
             self.dzwiek("am")
@@ -136,10 +148,9 @@ class Game():
             if self.Kolizja(self.snake.x[0],self.snake.y[0],self.snake.x[i],self.snake.y[i]):
                 self.dzwiek("stuk")
                 raise "Game over"
+                
         
-        if not (0 <= self.snake.x[0] <= W and 0 <= self.snake.y[0] <= H):
-            self.dzwiek("stuk")
-            raise "Game over"
+        
 
     def Wynik(self):
         self.gra.draw_text(f"Wynik {self.snake.dlugosc-5}", 30, 650, 10, self.gra.WHITE)
