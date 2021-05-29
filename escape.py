@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 29 11:44:13 2021
+Gra kot i mysz
+Nie pozwól myszy zostać złapaną!
+Wykorzystano bibliotekę pygame.
 
 @author: Asus
 """
