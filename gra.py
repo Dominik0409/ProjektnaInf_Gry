@@ -1,57 +1,61 @@
 import pygame
+import random
+from menu import MainMenu
+from snake import Game
 
-
-win_szer, win_dl = 800, 800
-boazeria = pygame.image.load("boazeria.jpg")
-
-czarny = (0,0,0)
-czerwony = (255,0,0)
-bialy = (255,255,255)
-wiersze = kolumny = 8
-pole_rozmiar = win_szer//wiersze
-
-class Szachownica():
-
+class Gra():
     def __init__(self):
-        self.szachownica = []
-        self.liczba_czerwonych = 12
-        self.liczba_bialych = 12
+        pygame.init()
+        self.FPS = 15
+        self.running, self.snake_playing = True, False
+        self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
+        self.DIS_W, self.DIS_H = 1000, 1000
+        self.display = pygame.Surface((self.DIS_W,self.DIS_H))
+        self.window = pygame.display.set_mode(((self.DIS_W,self.DIS_H)))
+        self.font = 'zasoby\czcionki\8-BIT WONDER.TTF'
+        self.BLACK, self.WHITE, self.PURPLE = (0,0,0) , (255,255,255) , (119,65,235)
+        self.curr_menu = MainMenu(self)
+        self.GraSnake = Game(self)
+        
+    def game_loop(self):
+        if self.snake_playing:
+            self.GraSnake.run()
 
-    def draw(self, win):
-        win.fill(czarny)
-        for w in range(wiersze):
-            for k in range(w%2, wiersze, 2):
-                pygame.draw.rect(win, czerwony, (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
-
-    def rozstawienie(self, win):
-        for w in range(wiersze):
-            for k in range(kolumny):
-                if k % 2 == (w+1)%2:
-                    if w < 3:
-                        krazek_czerwony = Krazek(w, k, czerwony)
-                        krazek_czerwony.draw(win)
-                    elif w > 4:
-                        krazek_bialy = Krazek(w, k, bialy)
-                        krazek_bialy.draw(win)
-
-
-class Krazek():
-
-    def __init__(self, wiersz, kolumna, kolor):
-        self.kolor = kolor
-        self.wiersz = wiersz
-        self.kolumna = kolumna
-        self.x = 0
-        self.y = 0
-        self.pozycja()
-
-    def pozycja(self):
-        self.x = win_szer/2 + self.kolumna*pole_rozmiar
-        self.y = win_dl/2 * self.wiersz*pole_rozmiar
-
-    def draw(self, win):
-        promien = pole_rozmiar/3
-        pygame.draw.circle(win, self.kolor, (self.x, self.y), promien)
-
-
-
+    def check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running, self.playing = False, False
+                self.curr_menu.run_display = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    self.START_KEY = True
+                if event.key == pygame.K_BACKSPACE:
+                    self.BACK_KEY = True
+                if event.key == pygame.K_DOWN:
+                    self.DOWN_KEY = True
+                if event.key == pygame.K_UP:
+                    self.UP_KEY =  True
+                if event.key == pygame.K_LEFT:
+                    self.LEFT_KEY =  True
+                if event.key == pygame.K_RIGHT:
+                    self.RIGHT_KEY =  True
+                    
+    def reset_keys(self):
+        self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
+        
+    def draw_text(self, text, size, x, y, color):
+        font_1 = pygame.font.Font(self.font, size)
+        text_surface_1 = font_1.render(text, True, self.BLACK)
+        text_rect_1 = text_surface_1.get_rect()
+        text_rect_1.topleft = (x+5,y+5)
+        font_2 = pygame.font.Font(self.font, size)
+        text_surface_2 = font_2.render(text, True, color)
+        text_rect_2 = text_surface_2.get_rect()
+        text_rect_2.topleft = (x,y)
+        self.display.blit(text_surface_1,text_rect_1)
+        self.window.blit(text_surface_1,text_rect_1)
+        self.display.blit(text_surface_2,text_rect_2)
+        self.window.blit(text_surface_2,text_rect_2)  
+                
+                
+                

@@ -1,25 +1,7 @@
-import pygame
-from gra import Szachownica
+from gra import Gra
 
-win_szer, win_dl = 800, 800
-win = pygame.display.set_mode((win_szer,win_dl))
+g = Gra()
 
-def main():
-
-    run = True
-    szachownica = Szachownica()
-
-    while run:
-        pygame.init()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
-
-        szachownica.draw(win)
-        szachownica.rozstawienie(win)
-        pygame.display.update()
-    pygame.quit()
-
-main()
+while g.running:
+    g.curr_menu.display_menu()
+    g.game_loop()
