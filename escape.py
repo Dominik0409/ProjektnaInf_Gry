@@ -1,9 +1,9 @@
+  
 # -*- coding: utf-8 -*-
 """
 Gra kot i mysz
 Nie pozwól myszy zostać złapaną!
 Wykorzystano bibliotekę pygame.
-
 @author: Asus
 """
 
