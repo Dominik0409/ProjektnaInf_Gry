@@ -95,6 +95,8 @@ def win_check(num):
             return True
     
     
+    
+    
     for tile in range(3):
         #po przekątnej z lewej do prawej
         #0,0; 1,1; 2,2
