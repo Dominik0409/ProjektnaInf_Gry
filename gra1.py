@@ -13,9 +13,10 @@ pole_rozmiar = win_szer//wiersze
 class Szachownica():
 
     def __init__(self):
-        self.szachownica = []
+        self.szachownica = np.zeros((8,8))
         self.liczba_czerwonych = 12
         self.liczba_bialych = 12
+        self.rozstawienie(win)
 
     def draw(self, win):
         win.fill(czarny)
@@ -26,14 +27,31 @@ class Szachownica():
     def rozstawienie(self, win):
         for w in range(wiersze):
             for k in range(kolumny):
-                if k % 2 == (w+1)%2:
-                    if w < 3:
-                        krazek_czerwony = Krazek(w, k, czerwony)
-                        krazek_czerwony.draw(win)
-                    elif w > 4:
-                        krazek_bialy = Krazek(w, k, bialy)
-                        krazek_bialy.draw(win)
+                if w < 3:
+                    if k%2 == (w+1)%2:
+                        self.szachownica[w,k] = 1
+                elif w > 4:
+                    if k % 2 == (w + 1) % 2:
+                        self.szachownica[w,k] = 2
 
+    def rozstawienie_rysuj(self, win):
+        for w in range(wiersze):
+            for k in range(kolumny):
+                if self.szachownica[w,k] == 1:
+                    krazek_bialy = Krazek(w, k, bialy)
+                    krazek_bialy.draw(win)
+                elif self.szachownica[w,k] == 2:
+                    krazek_czerwony = Krazek(w, k, czerwony)
+                    krazek_czerwony.draw(win)
+
+    def ruch_krazek(self, krazek, wiersz, kolumna):
+        print(self.szachownica)
+        self.szachownica[krazek.wiersz, krazek.kolumna], self.szachownica[wiersz,kolumna] = self.szachownica[wiersz,kolumna], self.szachownica[krazek.wiersz, krazek.kolumna]
+        krazek.ruch(wiersz,kolumna)
+        pass
+
+    def get_krazek(self, wiersz, kolumna):
+        return self.szachownica[wiersz,kolumna]
 
 class Krazek():
 
@@ -52,3 +70,8 @@ class Krazek():
     def draw(self, win):
         promien = pole_rozmiar/3
         pygame.draw.circle(win, self.kolor, (self.x, self.y), promien)
+        
+    def ruch(self, wiersz, kolumna):
+        self.wiersz = wiersz
+        self.kolumna = kolumna
+        self.pozycja()
