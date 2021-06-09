@@ -1,14 +1,12 @@
 import pygame
+import numpy as np
+from warcaby_kolory import kolory
 
+win_szer, win_dl = 1200, 800
+szach_szer, szach_dl = 800, 800
 
-win_szer, win_dl = 800, 800
-boazeria = pygame.image.load("boazeria.jpg")
-
-czarny = (0,0,0)
-czerwony = (255,0,0)
-bialy = (255,255,255)
 wiersze = kolumny = 8
-pole_rozmiar = win_szer//wiersze
+pole_rozmiar = szach_szer//wiersze
 
 class Szachownica():
 
