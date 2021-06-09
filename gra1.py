@@ -17,10 +17,10 @@ class Szachownica():
         self.rozstawienie(win)
 
     def draw(self, win):
-        win.fill(czarny)
+        win.fill(kolory["czarny"])
         for w in range(wiersze):
             for k in range(w%2, wiersze, 2):
-                pygame.draw.rect(win, czerwony, (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
+                pygame.draw.rect(win, kolory["czerwony"], (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
 
     def rozstawienie(self, win):
         for w in range(wiersze):
@@ -36,10 +36,10 @@ class Szachownica():
         for w in range(wiersze):
             for k in range(kolumny):
                 if self.szachownica[w,k] == 1:
-                    krazek_bialy = Krazek(w, k, bialy)
+                    krazek_bialy = Krazek(w, k, kolory["bialy"])
                     krazek_bialy.draw(win)
                 elif self.szachownica[w,k] == 2:
-                    krazek_czerwony = Krazek(w, k, czerwony)
+                    krazek_czerwony = Krazek(w, k, kolory["czerwony"])
                     krazek_czerwony.draw(win)
 
     def ruch_krazek(self, krazek, wiersz, kolumna):
