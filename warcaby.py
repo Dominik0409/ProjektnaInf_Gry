@@ -1,7 +1,9 @@
 import pygame
-from gra1 import Szachownica
+from gra1 import pole_rozmiar, wiersze, kolumny
+from warcaby_gra import Gra
 
-win_szer, win_dl = 800, 800
+win_szer, win_dl = 1200, 800
+szach_szer, szach_dl = 800, 800
 win = pygame.display.set_mode((win_szer,win_dl))
 
 def klik(pozycja):
@@ -13,7 +15,7 @@ def klik(pozycja):
 def main():
 
     run = True
-    szachownica = Szachownica()
+    gra = Gra(win)
 
     while run:
         pygame.init()
@@ -21,11 +23,14 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pozycja = pygame.mouse.get_pos()
+                wiersz, kolumna = klik(pozycja)
+                if (pozycja[0] > 900 and pozycja[0] < 1115) and (pozycja[1] > 735 and pozycja[1] < 770):
+                    pygame.quit()
 
-        szachownica.draw(win)
-        szachownica.rozstawienie(win)
-        szachownica.rozstawienie_rysuj(win)
+        gra.init_szachownica()
+        gra.init_menu()
+
         pygame.display.update()
     pygame.quit()
 
