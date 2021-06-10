@@ -22,9 +22,6 @@ czarny = (0, 0, 0)
 zielony = (0, 255, 0)
 biały = (255, 255, 255)
 
-#szer_kot = 227 
-#wys_kot = 150
-
 szer_mysz = 71
 wys_mysz = 70
 
@@ -116,7 +113,7 @@ def petla():
         linia(szer_okno -170, 0, 20, wys_okno, czarny)
         kot(kot_startx, kot_starty)
         mysz(x,y)
-        if x > szer_okno - szer_mysz or x < 0: #800-73
+        if x > szer_okno - szer_mysz or x < 0: 
             zderzenie(x,y)
         if kot_starty > wys_okno: 
             kot_starty = 0 - kot_szer
