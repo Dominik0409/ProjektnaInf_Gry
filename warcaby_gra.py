@@ -1,7 +1,7 @@
 ''' Ten plik służy optymalizacji kodu '''
 
 import pygame
-from gra import Szachownica, Krazek
+from gra1 import Szachownica, Krazek
 from warcaby_minimenu import Menu
 
 class Gra():
