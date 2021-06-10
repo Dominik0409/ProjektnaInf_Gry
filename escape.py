@@ -22,7 +22,7 @@ czarny = (0, 0, 0)
 zielony = (0, 255, 0)
 biały = (255, 255, 255)
 
-#szer_kot = 227 #bez tego chyba
+#szer_kot = 227 
 #wys_kot = 150
 
 szer_mysz = 71
@@ -52,10 +52,6 @@ def rekord(licz):
 	font = pygame.font.SysFont(None,30)
 	tekst = font.render("Score : "+str(licz), True, czarny)
 	okno_monitor.blit(tekst,(0,10))
-
-def przegrana_tekst(licz):   ###chyba mi to niepotrzebne
-    over_tekst = over_font.render("score :"+str(licz), True, czarny)
-    okno_monitor.blit(over_tekst,(0,0))
 
 def wyswietlanie_tekst(tekst, font):
 	tekst_Styl = font.render(tekst, True, zielony)
