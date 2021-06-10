@@ -1,7 +1,7 @@
 '''Ten plik służy od inicjalizacji minimalnego menu gry, pojawiającego sie po prawej stronie planszy'''
 
 import pygame
-from gra import Szachownica
+from gra1 import Szachownica
 from warcaby_kolory import kolory
 from warcaby_gra import Gra
 
