@@ -131,5 +131,3 @@ def petla():
         pygame.display.update()
         clock.tick(60)
 
-petla()
-pygame.quit()

@@ -23,6 +23,7 @@ class MainMenu(Menu):
         self.snakex, self.snakey = 150, 200
         self.kikx, self.kiky = self.snakex, self.snakey + 40
         self.warcabyx, self.warcabyy = self.snakex, self.snakey + 80
+        self.kimx, self.kimy = self.snakex, self.snakey + 120
         self.cursor_rect.midtop = (self.snakex + self.offset, self.snakey)
         
     def display_menu(self):
@@ -36,6 +37,7 @@ class MainMenu(Menu):
             self.gra.draw_text('Snake', 40, self.snakex,self.snakey, self.gra.PURPLE)
             self.gra.draw_text('Kolko i krzyzyk', 40, self.kikx,self.kiky, self.gra.PURPLE)
             self.gra.draw_text('Warcaby', 40, self.warcabyx,self.warcabyy, self.gra.PURPLE)
+            self.gra.draw_text('Kot i mysz', 40, self.kimx,self.kimy, self.gra.PURPLE)
             self.draw_cursor()
             self.blit_screen()
 # ruch kursora po menu            
@@ -46,21 +48,27 @@ class MainMenu(Menu):
                 self.state = 'Kolko i krzyzyk'
             elif self.state == 'Kolko i krzyzyk':
                 self.cursor_rect.midtop= (self.warcabyx + self.offset, self. warcabyy)
-                self.state = 'Kolko i krzyzyk'
+                self.state = 'Warcaby'
             elif self.state == 'Warcaby':
+                self.cursor_rect.midtop= (self.kimx + self.offset, self. kimy)
+                self.state = 'Kot i mysz'
+            elif self.state == 'Kot i mysz':
                 self.cursor_rect.midtop= (self.snakex + self.offset, self. snakey)
                 self.state = 'Snake'
         
         elif self.gra.UP_KEY:
             if self.state == 'Snake':
-                self.cursor_rect.midtop= (self.warcabyx + self.offset, self. warcabyy)
-                self.state = 'Warcaby'
+                self.cursor_rect.midtop= (self.kimx + self.offset, self. kimy)
+                self.state = 'Kot i mysz'
             elif self.state == 'Kolko i krzyzyk':
                 self.cursor_rect.midtop= (self.snakex + self.offset, self. snakey)
                 self.state = 'Snake'
             elif self.state == 'Warcaby':
                 self.cursor_rect.midtop= (self.kikx + self.offset, self. kiky)
                 self.state = 'Kolko i krzyzyk'
+            elif self.state == 'Kot i mysz':
+                self.cursor_rect.midtop= (self.warcabyx + self.offset, self. warcabyy)
+                self.state = 'Warcaby'
 # wcisniecie klawisza enter powoduje wybranie gry             
     def check_input(self):
         self.move_cursor()
@@ -71,6 +79,8 @@ class MainMenu(Menu):
                 pass
             elif self.state == 'Warcaby':
                 pass
+            elif self.state == 'Kot i mysz':
+                self.gra.kim_playing = True
             self.run_display = False
         
         

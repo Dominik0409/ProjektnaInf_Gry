@@ -2,12 +2,13 @@ import pygame
 import random
 from menu import MainMenu
 from snake import Game
+import escape
 
 class Gra():
     def __init__(self):
         pygame.init()
         self.FPS = 15
-        self.running, self.snake_playing = True, False
+        self.running, self.snake_playing, self.kim_playing = True, False, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
         self.DIS_W, self.DIS_H = 1000, 1000
         self.display = pygame.Surface((self.DIS_W,self.DIS_H))
@@ -20,6 +21,8 @@ class Gra():
     def game_loop(self):
         if self.snake_playing:
             self.GraSnake.run()
+        elif self.kim_playing:
+            escape.petla()
 
     def check_events(self):
         for event in pygame.event.get():
