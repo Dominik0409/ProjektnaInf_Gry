@@ -45,15 +45,6 @@ def krzyzyk():
     pygame.display.update()
     #win_check()
     
-# def remis():
-#     font = font = pygame.font.SysFont(None, 40)
-#     text_surface = font.render('Remis', True, (0, 0, 255))
-#     win.blit(text_surface, (width/2.5, height/2))
-#     pygame.display.update()
-#     time.sleep(1)
-#     text_surface = font.render('Remis', True, (135, 206, 250))
-#     win.blit(text_surface, (width/2.5, height/2))
-#     pygame.display.update()
     
 #kolory RGB
 win.fill((135, 206, 250))
@@ -147,16 +138,9 @@ def win_check(num):
             continue
         else:
             break
-   #?????????????????????
+   
     else:
-        return True
-    
-    # if count == 9:
-    #     remis()
-    #     return True
-    #     won = True
-        
-        
+        return True       
     
 #Main
 #potrzebne do podtrzymania pętli
@@ -228,7 +212,7 @@ while run:
                         board[0][0] = 2
                     #przelaczymy miejsce na zajęte
                     first_open = False
-                    count += 1
+                    
 
                 #pętle analogiczne do tej powyżej, sprawdzanie warunków
                 if second.collidepoint(pos) and second_open:
@@ -242,7 +226,7 @@ while run:
                         draw_object = 'o'
                         board[0][1] = 2
                     second_open = False
-                    count += 1
+                    
 
                 if third.collidepoint(pos) and third_open:
                     if draw_object == 'o':
@@ -255,8 +239,7 @@ while run:
                         draw_object = 'o'
                         board[0][2] = 2
                     third_open = False
-                    count += 1
-                    
+                                       
 
                 if fourth.collidepoint(pos) and fourth_open:
                     if draw_object == 'o':
@@ -269,8 +252,7 @@ while run:
                         draw_object = 'o' 
                         board[1][0] = 2
                     fourth_open = False
-                    count += 1
-
+                   
                 if fifth.collidepoint(pos) and fifth_open:
                     if draw_object == 'o':
                         pygame.draw.circle(win, circle_color,(300,300), 60 , circle_width)
@@ -282,7 +264,7 @@ while run:
                         draw_object = 'o'
                         board[1][1] = 2
                     fifth_open = False
-                    count += 1
+                    
 
                 if sixth.collidepoint(pos) and sixth_open:
                     if draw_object == 'o':
@@ -295,7 +277,7 @@ while run:
                         draw_object = 'o'
                         board[1][2] = 2
                     sixth_open = False
-                    count += 1
+                    
 
                 if seventh.collidepoint(pos) and seventh_open:
                     if draw_object == 'o':
@@ -308,7 +290,7 @@ while run:
                         draw_object = 'o'
                         board[2][0] = 2
                     seventh_open = False
-                    count += 1
+                    
 
                 if eighth.collidepoint(pos) and eighth_open:
                     if draw_object == 'o':
@@ -321,7 +303,7 @@ while run:
                         draw_object = 'o'
                         board[2][1] = 2
                     eighth_open = False
-                    count += 1
+                    
 
                 if ninth.collidepoint(pos) and ninth_open:
                     if draw_object == 'o':
@@ -334,7 +316,6 @@ while run:
                         draw_object = 'o'
                         board[2][2] = 2
                     ninth_open = False
-                    count += 1
 
 
 #czy wygrało kółko czy krzyżyk
@@ -346,20 +327,7 @@ while run:
     #pygame.display.update()
     if win_check(2):
         krzyzyk()   
-        won = True 
-    
-        
-    # if won == False and count == 9:
-    #     remis()
-    #     won = True
-    # #nie mogę wykminić, won na początku ma false wiec trzeba uwazac
-    # if count == 9:
-    #     R = False
-    #     if R == won:
-    #         remis()
-    #         won = True
-    #count się źle zlicza
-    
+        won = True     
        
     #odswieży ekran
     pygame.display.update()
