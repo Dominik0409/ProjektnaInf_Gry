@@ -6,6 +6,8 @@ Na wyswietlonej planszy zaznacz symol kółka lub krzyżyka.
 Osoba, która jako pierwsza postawi swoje 3 symbole w jednej linii
 (tj poziomo, pionowo lub po przekątnej) wygrywa.
 
+Po zakończonej rozgrywce by zagrać ponownie należy wcisnąć spację
+
 Do uruchomienia potrzebna biblioteka pygame
 """
 
@@ -27,7 +29,6 @@ def kolko():
     text_surface = font.render('Wygrywa Team Kółko', True, (0, 0, 255))
     win.blit(text_surface, (width/4, height/2))
     pygame.display.update()
-    #tylko to też nie zachowuje się jak 1 sekunda tylko dziesięć (sprawdzone)
     time.sleep(1)
     text_surface = font.render('Wygrywa Team Kółko', True, (135, 206, 250))
     win.blit(text_surface, (width/4, height/2))
