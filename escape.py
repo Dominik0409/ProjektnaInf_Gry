@@ -10,6 +10,7 @@ Wykorzystano bibliotekę pygame.
 import pygame
 import random
 import time
+from pygame.locals import *
 
 pygame.init()
 
@@ -98,8 +99,10 @@ def petla():
     while not gameExit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()               
+                pygame.quit() 
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    gameExit = True
                 if event.key == pygame.K_LEFT:
                     x_zmiana = -15
                 if event.key == pygame.K_RIGHT:

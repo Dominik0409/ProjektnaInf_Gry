@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 
 rozmiar = 25
-W, H = 1000, 1000
+W, H = 800, 800
 
 #klasa jablko - dodaje 1 pkt dlugosci i 0 predkosci
 class Jablko():
@@ -124,16 +124,15 @@ class Game():
         self.Predkosc()
         
         if self.snake.x[0] >= W:
-            self.snake.x[0] -= 1000
+            self.snake.x[0] -= W
             
         if self.snake.x[0] < 0:
-            self.snake.x[0] += 1000
+            self.snake.x[0] += W
             
         if self.snake.y[0] >= H:
-            self.snake.y[0] -= 1000
-            
+            self.snake.y[0] -= H
         if self.snake.y[0] < 0:
-            self.snake.y[0] += 1000
+            self.snake.y[0] += H
 
         if self.Kolizja(self.snake.x[0],self.snake.y[0],self.jablko.x,self.jablko.y):
             self.dzwiek("am")
@@ -156,17 +155,17 @@ class Game():
         
 
     def Wynik(self):
-        self.gra.draw_text(f"Wynik {self.snake.dlugosc-5}", 30, 650, 10, self.gra.WHITE)
+        self.gra.draw_text(f"Wynik {self.snake.dlugosc-5}", 30, 450, 10, self.gra.WHITE)
         pygame.display.flip()
         
     def Predkosc(self):
-        self.gra.draw_text(f"Predkosc {self.FPS}", 30, 650, 50, self.gra.WHITE)
+        self.gra.draw_text(f"Predkosc {self.FPS}", 30, 450, 50, self.gra.WHITE)
         pygame.display.flip()
 
     def gameover(self):
         self.gra.window.blit(pygame.image.load("bg4.jpg"), (0,0))
-        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, 200, self.gra.DIS_H/2, self.gra.WHITE)
-        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  30, 20, self.gra.DIS_H/2 + 50, self.gra.WHITE)
+        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, 20, self.gra.DIS_H/2, self.gra.WHITE)
+        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  20, 20, self.gra.DIS_H/2 + 50, self.gra.WHITE)
         pygame.display.flip()
 
     def reset(self):

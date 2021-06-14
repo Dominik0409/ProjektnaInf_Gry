@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Gra kółko i krzyżyk
-
 Na wyswietlonej planszy zaznacz symol kółka lub krzyżyka.
 Osoba, która jako pierwsza postawi swoje 3 symbole w jednej linii
 (tj poziomo, pionowo lub po przekątnej) wygrywa.
-
 Po zakończonej rozgrywce by zagrać ponownie należy wcisnąć spację
-
 Do uruchomienia potrzebna biblioteka pygame
 """
 
@@ -22,6 +19,20 @@ width = 600
 height = 600
 
 win = pygame.display.set_mode((width,height))
+
+#kolory RGB
+win.fill((135, 206, 250))
+circle_color = (255, 255, 0)
+line_color = (145, 139, 200)
+rect_color = (30,144, 255) 
+
+#parametry kształtów
+circle_radius = 60
+circle_width = 15
+line_width = 10
+space = 55
+cross_width = 25
+cross_color = (192, 192, 192)
 
 #wyswietlanie tekstu kto wygral
 def kolko():
@@ -45,60 +56,11 @@ def krzyzyk():
     win.blit(text_surface, (width/4, height/2))
     pygame.display.update()
     #win_check()
-    
-    
-#kolory RGB
-win.fill((135, 206, 250))
-circle_color = (255, 255, 0)
-line_color = (145, 139, 200)
-rect_color = (30,144, 255) 
-
-#parametry kształtów
-circle_radius = 60
-circle_width = 15
-line_width = 10
-space = 55
-cross_width = 25
-cross_color = (192, 192, 192)
-
-#Nazwa okna
-pygame.display.set_caption('Kółko i krzyżyk')
-
-#układ gry, 3 rzędy i 3 kolumny
-board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-
-#font = pygame.font.Font('freesansbold.ttf', 10)
-
-#plansza 3x3
-first = pygame.draw.rect(win, rect_color, (50,50,150,150))
-second = pygame.draw.rect(win, rect_color, (225,50,150,150))
-third = pygame.draw.rect(win, rect_color, (400,50,150,150))
-
-fourth = pygame.draw.rect(win, rect_color, (50,225,150,150))
-fifth = pygame.draw.rect(win, rect_color, (225,225,150,150))
-sixth = pygame.draw.rect(win, rect_color, (400,225,150,150))
-
-seventh = pygame.draw.rect(win,rect_color, (50,400,150,150))
-eighth = pygame.draw.rect(win, rect_color, (225,400,150,150))
-ninth = pygame.draw.rect(win, rect_color, (400,400,150,150))
-
-#pierwszy ruch
-draw_object = 'o'
-
-#czy miejsce zajęte czy nie
-first_open = True
-second_open = True
-third_open = True
-fourth_open = True
-fifth_open = True
-sixth_open = True
-seventh_open = True
-eighth_open = True
-ninth_open = True
 
 #board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-def win_check(num):
+def win_check(num,b):
     #dla każdej poziomej listy
+    board = b
     for row in board:
         #dla każdego symoblu w małej liscie
         for tile in row:
@@ -145,193 +107,215 @@ def win_check(num):
     
 #Main
 #potrzebne do podtrzymania pętli
-run = True
-won = False
-count = 0
+def petla():
+    win.fill((255,255,255))
+    run = True
+    won = False
+    first_open = True
+    second_open = True
+    third_open = True
+    fourth_open = True
+    fifth_open = True
+    sixth_open = True
+    seventh_open = True
+    eighth_open = True
+    ninth_open = True
+    first = pygame.draw.rect(win, rect_color, (50,50,150,150))
+    second = pygame.draw.rect(win, rect_color, (225,50,150,150))
+    third = pygame.draw.rect(win, rect_color, (400,50,150,150))
 
-while run:
+    fourth = pygame.draw.rect(win, rect_color, (50,225,150,150))
+    fifth = pygame.draw.rect(win, rect_color, (225,225,150,150))
+    sixth = pygame.draw.rect(win, rect_color, (400,225,150,150))
 
-    #dla zdarzenia
-    for event in pygame.event.get():
-
-        #zakoncz
-        if event.type == pygame.QUIT:
-            run = False
-
-        #spacja do wznowienia gry
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                #znowu patrzymy czy miejsce zajęte czy nie
-                first_open = True
-                second_open = True
-                third_open = True
-                fourth_open = True
-                fifth_open = True
-                sixth_open = True
-                seventh_open = True
-                eighth_open = True
-                ninth_open = True
-                
-                run = True
-                won = False
-                board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-                
-                #plansza 3x3
-                first = pygame.draw.rect(win, rect_color, (50,50,150,150))
-                second = pygame.draw.rect(win, rect_color, (225,50,150,150))
-                third = pygame.draw.rect(win, rect_color, (400,50,150,150))
-
-                fourth = pygame.draw.rect(win, rect_color, (50,225,150,150))
-                fifth = pygame.draw.rect(win, rect_color, (225,225,150,150))
-                sixth = pygame.draw.rect(win, rect_color, (400,225,150,150))
-
-                seventh = pygame.draw.rect(win,rect_color, (50,400,150,150))
-                eighth = pygame.draw.rect(win, rect_color, (225,400,150,150))
-                ninth = pygame.draw.rect(win, rect_color, (400,400,150,150))
-
-        #które miejsca zajęte po kliknięciu
-        if event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
-
-            #czy po wcisnieciu kursorem jest wolne
-            if won != True:
-                if first.collidepoint(pos) and first_open:
-                    #pierwszy ruch
-                    if draw_object == 'o':
-                        #kształt kółko
-                        pygame.draw.circle(win, circle_color,(125,125), 60 , circle_width)
-                        #tzn ze kolejny ruch musi byc przeciwnika
-                        draw_object = 'x'
-                        board[0][0] = 1
-                       
-                    else:
-                        #jesli to nie kolko, to krzyzyk
-                        pygame.draw.line(win, cross_color, (125 + space, 125 - space),(125 - space, 125 +space),cross_width)
-                        pygame.draw.line(win, cross_color, (125 + space, 125 + space),(125 - space, 125 -space),cross_width)
-                        #kolejny ruch bedzie przeciwnika
-                        draw_object = 'o'
-                        board[0][0] = 2
-                    #przelaczymy miejsce na zajęte
-                    first_open = False
-                    
-
-                #pętle analogiczne do tej powyżej, sprawdzanie warunków
-                if second.collidepoint(pos) and second_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(300, 125), 60 , circle_width)
-                        draw_object = 'x'
-                        board[0][1] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (300 + space, 125 - space), (300 - space, 125 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (300 + space, 125 + space), (300 - space, 125 - space),cross_width)
-                        draw_object = 'o'
-                        board[0][1] = 2
-                    second_open = False
-                    
-
-                if third.collidepoint(pos) and third_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(475,125), 60 , circle_width)
-                        draw_object = 'x'
-                        board[0][2] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (475 + space, 125 - space),(475 - space, 125 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (475 + space, 125 + space),(475 - space, 125 - space),cross_width)
-                        draw_object = 'o'
-                        board[0][2] = 2
-                    third_open = False
-                                       
-
-                if fourth.collidepoint(pos) and fourth_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color, (125,300), 60 , circle_width)
-                        draw_object = 'x'
-                        board[1][0] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (125 + space, 300 - space),(125 - space, 300 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (125 + space, 300 + space),(125 - space, 300 - space),cross_width)
-                        draw_object = 'o' 
-                        board[1][0] = 2
-                    fourth_open = False
-                   
-                if fifth.collidepoint(pos) and fifth_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(300,300), 60 , circle_width)
-                        draw_object = 'x'
-                        board[1][1] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (300 + space, 300 - space), (300 - space, 300 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (300 +  space, 300 + space), (300 - space, 300 - space),cross_width)
-                        draw_object = 'o'
-                        board[1][1] = 2
-                    fifth_open = False
-                    
-
-                if sixth.collidepoint(pos) and sixth_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(475,300), 60 , circle_width)
-                        draw_object = 'x'
-                        board[1][2] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (475 + space, 300 - space),( 475 - space, 300 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (475 + space, 300 + space),( 475 - space, 300 - space),cross_width)
-                        draw_object = 'o'
-                        board[1][2] = 2
-                    sixth_open = False
-                    
-
-                if seventh.collidepoint(pos) and seventh_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(125,475), 60 , circle_width)
-                        draw_object = 'x'
-                        board[2][0] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (125 + space, 475 - space),( 125 - space, 475 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (125 + space, 475 + space),( 125 - space, 475 - space),cross_width)
-                        draw_object = 'o'
-                        board[2][0] = 2
-                    seventh_open = False
-                    
-
-                if eighth.collidepoint(pos) and eighth_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(300,475), 60 , circle_width)
-                        draw_object = 'x'
-                        board[2][1] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (300 + space, 475 - space),(300 - space, 475 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (300 + space, 475 + space),(300 - space, 475 - space),cross_width)
-                        draw_object = 'o'
-                        board[2][1] = 2
-                    eighth_open = False
-                    
-
-                if ninth.collidepoint(pos) and ninth_open:
-                    if draw_object == 'o':
-                        pygame.draw.circle(win, circle_color,(475,475), 60 , circle_width)
-                        draw_object = 'x'
-                        board[2][2] = 1
-                    else:
-                        pygame.draw.line(win, cross_color, (475 + space, 475 - space),(475 - space, 475 + space),cross_width)
-                        pygame.draw.line(win, cross_color, (475 + space, 475 + space),(475 - space, 475 - space),cross_width)
-                        draw_object = 'o'
-                        board[2][2] = 2
-                    ninth_open = False
-
-
-#czy wygrało kółko czy krzyżyk
-    if win_check(1):
-        kolko()
-        won = True
-        
-                
-    #pygame.display.update()
-    if win_check(2):
-        krzyzyk()   
-        won = True     
-       
-    #odswieży ekran
-    pygame.display.update()
+    seventh = pygame.draw.rect(win,rect_color, (50,400,150,150))
+    eighth = pygame.draw.rect(win, rect_color, (225,400,150,150))
+    ninth = pygame.draw.rect(win, rect_color, (400,400,150,150))
+    board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    draw_object = 'o'
+    while run:
     
-#zamknie pętle
-pygame.quit()
+        #dla zdarzenia
+        for event in pygame.event.get():
+    
+            #zakoncz
+            if event.type == pygame.QUIT:
+                run = False
+    
+            #spacja do wznowienia gry
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+                if event.key == pygame.K_SPACE:
+                    #znowu patrzymy czy miejsce zajęte czy nie
+                    first_open = True
+                    second_open = True
+                    third_open = True
+                    fourth_open = True
+                    fifth_open = True
+                    sixth_open = True
+                    seventh_open = True
+                    eighth_open = True
+                    ninth_open = True
+                    
+                    run = True
+                    won = False
+                    board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+                    
+                    #plansza 3x3
+                    first = pygame.draw.rect(win, rect_color, (50,50,150,150))
+                    second = pygame.draw.rect(win, rect_color, (225,50,150,150))
+                    third = pygame.draw.rect(win, rect_color, (400,50,150,150))
+                
+                    fourth = pygame.draw.rect(win, rect_color, (50,225,150,150))
+                    fifth = pygame.draw.rect(win, rect_color, (225,225,150,150))
+                    sixth = pygame.draw.rect(win, rect_color, (400,225,150,150))
+                
+                    seventh = pygame.draw.rect(win,rect_color, (50,400,150,150))
+                    eighth = pygame.draw.rect(win, rect_color, (225,400,150,150))
+                    ninth = pygame.draw.rect(win, rect_color, (400,400,150,150))
+             
+            #które miejsca zajęte po kliknięciu
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+    
+                #czy po wcisnieciu kursorem jest wolne
+                if won != True:
+                    if first.collidepoint(pos) and first_open:
+                        #pierwszy ruch
+                        if draw_object == 'o':
+                            #kształt kółko
+                            pygame.draw.circle(win, circle_color,(125,125), 60 , circle_width)
+                            #tzn ze kolejny ruch musi byc przeciwnika
+                            draw_object = 'x'
+                            board[0][0] = 1
+                           
+                        else:
+                            #jesli to nie kolko, to krzyzyk
+                            pygame.draw.line(win, cross_color, (125 + space, 125 - space),(125 - space, 125 +space),cross_width)
+                            pygame.draw.line(win, cross_color, (125 + space, 125 + space),(125 - space, 125 -space),cross_width)
+                            #kolejny ruch bedzie przeciwnika
+                            draw_object = 'o'
+                            board[0][0] = 2
+                        #przelaczymy miejsce na zajęte
+                        first_open = False
+                        
+    
+                    #pętle analogiczne do tej powyżej, sprawdzanie warunków
+                    if second.collidepoint(pos) and second_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(300, 125), 60 , circle_width)
+                            draw_object = 'x'
+                            board[0][1] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (300 + space, 125 - space), (300 - space, 125 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (300 + space, 125 + space), (300 - space, 125 - space),cross_width)
+                            draw_object = 'o'
+                            board[0][1] = 2
+                        second_open = False
+                        
+    
+                    if third.collidepoint(pos) and third_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(475,125), 60 , circle_width)
+                            draw_object = 'x'
+                            board[0][2] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (475 + space, 125 - space),(475 - space, 125 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (475 + space, 125 + space),(475 - space, 125 - space),cross_width)
+                            draw_object = 'o'
+                            board[0][2] = 2
+                        third_open = False
+                                           
+    
+                    if fourth.collidepoint(pos) and fourth_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color, (125,300), 60 , circle_width)
+                            draw_object = 'x'
+                            board[1][0] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (125 + space, 300 - space),(125 - space, 300 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (125 + space, 300 + space),(125 - space, 300 - space),cross_width)
+                            draw_object = 'o' 
+                            board[1][0] = 2
+                        fourth_open = False
+                       
+                    if fifth.collidepoint(pos) and fifth_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(300,300), 60 , circle_width)
+                            draw_object = 'x'
+                            board[1][1] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (300 + space, 300 - space), (300 - space, 300 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (300 +  space, 300 + space), (300 - space, 300 - space),cross_width)
+                            draw_object = 'o'
+                            board[1][1] = 2
+                        fifth_open = False
+                        
+    
+                    if sixth.collidepoint(pos) and sixth_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(475,300), 60 , circle_width)
+                            draw_object = 'x'
+                            board[1][2] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (475 + space, 300 - space),( 475 - space, 300 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (475 + space, 300 + space),( 475 - space, 300 - space),cross_width)
+                            draw_object = 'o'
+                            board[1][2] = 2
+                        sixth_open = False
+                        
+    
+                    if seventh.collidepoint(pos) and seventh_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(125,475), 60 , circle_width)
+                            draw_object = 'x'
+                            board[2][0] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (125 + space, 475 - space),( 125 - space, 475 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (125 + space, 475 + space),( 125 - space, 475 - space),cross_width)
+                            draw_object = 'o'
+                            board[2][0] = 2
+                        seventh_open = False
+                        
+    
+                    if eighth.collidepoint(pos) and eighth_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(300,475), 60 , circle_width)
+                            draw_object = 'x'
+                            board[2][1] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (300 + space, 475 - space),(300 - space, 475 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (300 + space, 475 + space),(300 - space, 475 - space),cross_width)
+                            draw_object = 'o'
+                            board[2][1] = 2
+                        eighth_open = False
+                        
+    
+                    if ninth.collidepoint(pos) and ninth_open:
+                        if draw_object == 'o':
+                            pygame.draw.circle(win, circle_color,(475,475), 60 , circle_width)
+                            draw_object = 'x'
+                            board[2][2] = 1
+                        else:
+                            pygame.draw.line(win, cross_color, (475 + space, 475 - space),(475 - space, 475 + space),cross_width)
+                            pygame.draw.line(win, cross_color, (475 + space, 475 + space),(475 - space, 475 - space),cross_width)
+                            draw_object = 'o'
+                            board[2][2] = 2
+                        ninth_open = False
+    
+    
+    #czy wygrało kółko czy krzyżyk
+        if win_check(1,board):
+            kolko()
+            won = True
+            
+                    
+        #pygame.display.update()
+        if win_check(2,board):
+            krzyzyk()   
+            won = True     
+           
+        #odswieży ekran
+        pygame.display.update()
+        
