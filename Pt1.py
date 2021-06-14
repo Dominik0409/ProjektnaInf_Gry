@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """
+
 Gra kółko i krzyżyk
 Na wyswietlonej planszy zaznacz symol kółka lub krzyżyka.
 Osoba, która jako pierwsza postawi swoje 3 symbole w jednej linii
 (tj poziomo, pionowo lub po przekątnej) wygrywa.
 Po zakończonej rozgrywce by zagrać ponownie należy wcisnąć spację
 Do uruchomienia potrzebna biblioteka pygame
+
 """
 
 import pygame
