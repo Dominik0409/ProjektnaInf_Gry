@@ -32,7 +32,6 @@ def main():
                 except IndexError:
                     pass
                 if (pozycja[0] > 900 and pozycja[0] < 1115) and (pozycja[1] > 735 and pozycja[1] < 770):
-                    run = False
+                    pygame.quit()
 
         gra.update()
-
