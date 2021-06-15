@@ -1,10 +1,6 @@
-'''Ten plik służy od inicjalizacji minimalnego menu gry, pojawiającego sie po prawej stronie planszy'''
-
 import pygame
 from gra1 import Szachownica
 from warcaby_kolory import kolory
-from warcaby_gra import Gra
-
 
 class Menu():
 
@@ -13,7 +9,6 @@ class Menu():
         self.dlugosc = 800
 
     def rysuj_tlo(self, win):
-        '''Ta funkcja ma na celu stworzenie podłoża graficznego menu'''
         boazeria = pygame.image.load("boazeria.jpg")
         siding = pygame.image.load("siding.jpg")
 
@@ -21,13 +16,10 @@ class Menu():
         win.blit(boazeria, (self.dlugosc, 0))
 
         win.blit(siding, (self.dlugosc, 700))
-        
-        # Dwa pliki obrazowe "boazeria.jpg" oraz "siding.jpg" zostały wklejone w meijsce pustej, czarnej przestrzeni okna gry
 
     def zawartosc(self, win):
         '''Funkcja, która tworzy zawartość menu'''
 
-        gra = Gra(win)
         szachownica = Szachownica()
 
         # Tekst powitalny
@@ -41,9 +33,9 @@ class Menu():
         kolejka = czcionka_kolejka.render("Aktualna kolejka: ", False, kolory["biały"])
         win.blit(kolejka, (820, 250))
         pygame.draw.rect(win, kolory["czarny"], (1030, 245, 45, 45))
-        pygame.draw.rect(win, gra.kolejka, (1030, 245, 40, 40))
+        pygame.draw.rect(win, szachownica.kolejka, (1030, 245, 40, 40))
 
-        # Informacje o liczbie pozostałych krążków
+        # Informacje o liczbie pozostąłych krążków
         czcionka_lkrazek = pygame.font.SysFont("Times New Roman", 18)
         krazek_b = czcionka_lkrazek.render(f"Liczba pozostałych białych krążków:", False, kolory["zielony"])
         krazek_c = czcionka_lkrazek.render(f"Liczba pozostałych czerwonych krążków:", False, kolory["zielony"])
@@ -55,7 +47,6 @@ class Menu():
         win.blit(lkrazek_c, (1150, 425))
 
     def przycisk(self, win):
-        ''' Funkcja, która tworzy imitację przycisku wyjścia z gry'''
         pygame.font.init()
 
         przycisk_x = 900
@@ -63,7 +54,9 @@ class Menu():
         przycisk_dl = 35
         przycisk_szer = 215
 
-        pygame.draw.rect(win, kolory["szary"], (przycisk_x, przycisk_y, przycisk_szer, przycisk_dl)) # Figura służaca za powierzchnię do interakcji za pomocą myszki
+        pygame.draw.rect(win, kolory["szary"], (przycisk_x, przycisk_y, przycisk_szer, przycisk_dl))
         czcionka_przycisk = pygame.font.SysFont("Arial", 14)
         tekst_przycisk = czcionka_przycisk.render("Jeżeli chcesz zakończyć grę, kliknij tutaj!", False, kolory["czarny"])
-        win.blit(tekst_przycisk, (przycisk_x , przycisk_y + (przycisk_dl)//4)) # Informacja na przycisku, umieszczona zgrubsza po środku prostokąta
+        win.blit(tekst_przycisk, (przycisk_x , przycisk_y + (przycisk_dl)//4))
+
+

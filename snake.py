@@ -164,8 +164,8 @@ class Game():
 
     def gameover(self):
         self.gra.window.blit(pygame.image.load("bg4.jpg"), (0,0))
-        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, 20, self.gra.DIS_H/2, self.gra.WHITE)
-        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  20, 20, self.gra.DIS_H/2 + 50, self.gra.WHITE)
+        self.gra.draw_text(f"Koniec gry         Wynik {self.snake.dlugosc}", 30, 70, self.gra.DIS_H/2, self.gra.WHITE)
+        self.gra.draw_text(f"Aby zagrac jeszcze raz kliknij Enter",  20, 70, self.gra.DIS_H/2 + 50, self.gra.WHITE)
         pygame.display.flip()
 
     def reset(self):

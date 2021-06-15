@@ -5,14 +5,19 @@ from menu import Tworcy
 from snake import Game
 import escape
 import Pt1
+import warcaby
+import warcaby_gra
+import warcaby_kolory
+import warcaby_minimenu
+import gra1
 
 class Gra():
     def __init__(self):
         pygame.init()
         self.FPS = 15
-        self.running, self.snake_playing, self.kim_playing, self.kik_playing = True, False, False, False
+        self.running, self.snake_playing, self.kim_playing, self.kik_playing, self.w_playing = True, False, False, False, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.LEFT_KEY, self.RIGHT_KEY= False, False, False, False, False, False
-        self.DIS_W, self.DIS_H = 800, 800
+        self.DIS_W, self.DIS_H = 1200, 800
         self.display = pygame.Surface((self.DIS_W,self.DIS_H))
         self.window = pygame.display.set_mode(((self.DIS_W,self.DIS_H)))
         self.font = 'zasoby\czcionki\8-BIT WONDER.TTF'
@@ -28,8 +33,12 @@ class Gra():
             self.GraSnake.run()
         elif self.kim_playing:
              escape.petla()
+             self.kim_playing = False
         elif self.kik_playing:
             Pt1.petla()
+            self.kik_playing = False
+        elif self.w_playing:
+            warcaby.main()
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
