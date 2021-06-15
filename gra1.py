@@ -23,7 +23,7 @@ class Szachownica():
         win.fill(kolory["czarny"], (0, 0, szach_dl, szach_szer))
         for w in range(wiersze):
             for k in range(w%2, wiersze, 2):
-                pygame.draw.rect(win, kolory["czerwony"], (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
+                pygame.draw.rect(win, kolory["bordowy"], (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
 
     def rozstawienie(self, win):
         '''Jest to funkcja, która aktualizuje macierz repezentującą szachownicę'''
