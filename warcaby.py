@@ -1,3 +1,9 @@
+'''Witamy w Warcabach! A raczej - pseudowarcabach!
+W tym programie użytkownik może tworzyć różne wzory za pomocą ustawionych na planszy krążków.
+Należy jendak pamiętać o obowiązującej kolejce!
+Zapraszamy do gry!'''
+
+
 import pygame
 from gra1 import pole_rozmiar, wiersze, kolumny
 from warcaby_gra import Gra
