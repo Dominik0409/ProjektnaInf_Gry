@@ -4,6 +4,8 @@
 Gra kot i mysz
 Nie pozwól myszy zostać złapaną!
 Wykorzystano bibliotekę pygame.
+Aby poruszać się postacią myszy użyj klawiszy kierunkowych klawiatury.
+Powodzenia!
 @author: Asus
 """
 
