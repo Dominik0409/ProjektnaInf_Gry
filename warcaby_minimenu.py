@@ -3,7 +3,6 @@
 import pygame
 from gra1 import Szachownica
 from warcaby_kolory import kolory
-from warcaby_gra import Gra
 
 
 class Menu():
@@ -27,7 +26,6 @@ class Menu():
     def zawartosc(self, win):
         '''Funkcja, która tworzy zawartość menu'''
 
-        gra = Gra(win)
         szachownica = Szachownica()
 
         # Tekst powitalny
