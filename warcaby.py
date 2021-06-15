@@ -1,3 +1,9 @@
+''' Witam w grze Warcaby!
+Ta edycja jest bardzo uproszczoną wersją - wprawdzie można to nazwać pseudo-warcabami.
+Użytkownik może kłaść swoje krążki gdzie chce - musi pamiętać jednak o obowiązującej kolejce!
+Zapraszam do gry!'''
+
+
 import pygame
 from gra1 import pole_rozmiar, wiersze, kolumny
 from warcaby_gra import Gra
@@ -22,16 +28,14 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pozycja = pygame.mouse.get_pos()
-                wiersz, kolumna = klik(pozycja)
-                if (pozycja[0] > 900 and pozycja[0] < 1115) and (pozycja[1] > 735 and pozycja[1] < 770):
-                    pygame.quit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pozycja = pygame.mouse.get_pos()
+            wiersz, kolumna = klik(pozycja)
+            gra.select(wiersz, kolumna)
+            if (pozycja[0] > 900 and pozycja[0] < 1115) and (pozycja[1] > 735 and pozycja[1] < 770):
+                pygame.quit()
 
-        gra.init_szachownica()
-        gra.init_menu()
-
-        pygame.display.update()
+        gra.update()
     pygame.quit()
 
 main()
