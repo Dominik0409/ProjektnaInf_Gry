@@ -20,7 +20,7 @@ class Szachownica():
     def draw(self, win):
         '''Funkcja służąca do narysowania typowej planszy do warcab'''
         
-        win.fill(kolory["czarny"])
+        win.fill(kolory["czarny"], (0, 0, szach_dl, szach_szer))
         for w in range(wiersze):
             for k in range(w%2, wiersze, 2):
                 pygame.draw.rect(win, kolory["czerwony"], (pole_rozmiar*w,pole_rozmiar*k,pole_rozmiar,pole_rozmiar))
@@ -43,6 +43,7 @@ class Szachownica():
     def rozstawienie_rysuj(self, win):
         ''' Funkcja, za pomocą której program rysuje obiekty klasy Krazek() na wyznaczonych polach planszowych'''
         
+        self.draw(win)
         for w in range(wiersze):
             for k in range(kolumny):
                 if self.szachownica_uklad[w,k] == 1: # Dla elementów macierzy reprezentującej szachownicę równych 1, program rysuje białe krążki
