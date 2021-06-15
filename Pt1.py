@@ -17,8 +17,8 @@ import time
 pygame.init()
 
 #Okno potrzebne do wyswietlenia gry
-width = 750
-height = 750
+width = 600
+height = 600
 
 win = pygame.display.set_mode((width,height))
 
