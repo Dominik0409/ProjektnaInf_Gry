@@ -1,6 +1,7 @@
 import pygame
 import random
 from menu import MainMenu
+from menu import Tworcy
 from snake import Game
 import escape
 import Pt1
@@ -16,15 +17,17 @@ class Gra():
         self.window = pygame.display.set_mode(((self.DIS_W,self.DIS_H)))
         self.font = 'zasoby\czcionki\8-BIT WONDER.TTF'
         self.BLACK, self.WHITE, self.PURPLE = (0,0,0) , (255,255,255) , (119,65,235)
-        self.curr_menu = MainMenu(self)
+        self.mainmenu = MainMenu(self)
+        self.tworcy = Tworcy(self)
+        self.curr_menu = self.mainmenu
         self.GraSnake = Game(self)
+
         
     def game_loop(self):
         if self.snake_playing:
             self.GraSnake.run()
         elif self.kim_playing:
-            escape.petla()
-            self.kim_playing = False
+             escape.petla()
         elif self.kik_playing:
             Pt1.petla()
     def check_events(self):

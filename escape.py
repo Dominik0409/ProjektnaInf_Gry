@@ -1,9 +1,10 @@
-  
 # -*- coding: utf-8 -*-
 """
 Gra kot i mysz
 Nie pozwól myszy zostać złapaną!
 Wykorzystano bibliotekę pygame.
+Aby poruszać się postacią myszy użyj klawiszy kierunkowych klawiatury.
+Powodzenia!
 @author: Asus
 """
 
@@ -28,7 +29,6 @@ wys_mysz = 70
 
 #ustawienia wyswietlacza
 okno_monitor = pygame.display.set_mode((szer_okno, wys_okno))
-pygame.display.set_caption('Uratuj mysz!')
 
 #sledzenie czasu
 clock = pygame.time.Clock()

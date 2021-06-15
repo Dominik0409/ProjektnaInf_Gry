@@ -86,11 +86,37 @@ class MainMenu(Menu):
             elif self.state == 'Kolko i krzyzyk':
                 self.gra.kik_playing = True
             elif self.state == 'Warcaby':
-                pass
+                self.gra.curr_menu = self.gra.tworcy
             elif self.state == 'Kot i mysz':
                 self.gra.kim_playing = True
             elif self.state == 'Wyjscie':
                 pygame.quit()
+            self.run_display = False
+
+class Tworcy(Menu):
+    def __init__(self,gra):
+        Menu.__init__(self, gra)
+        self.t1x, self.t1y = 50, 200
+        self.t2x, self.t2y = self.t1x, self.t1y + 40
+        self.t3x, self.t3y = self.t1x, self.t1y + 80
+        self.t4x, self.t4y = self.t1x, self.t1y + 120
+    
+    def display_menu(self):
+        self.run_display = True
+        while self.run_display:
+            self.gra.check_events()
+            self.check_input()
+            bg = pygame.image.load('bg1.jpg').convert()
+            self.gra.display.blit(bg, (0,0))
+            self.gra.draw_text('Dominik Buchholz', 40, self.t1x, self.t1y, self.gra.PURPLE)
+            self.gra.draw_text('Piotr Gieraltowski', 40, self.t2x,self.t2y, self.gra.PURPLE)
+            self.gra.draw_text('Julia Urbanek', 40, self.t3x,self.t3y, self.gra.PURPLE)
+            self.gra.draw_text('Andrzej Palski', 40, self.t4x,self.t4y, self.gra.PURPLE)
+            self.blit_screen()
+ 
+    def check_input(self):
+        if self.gra.START_KEY:
+            self.gra.curr_menu = self.gra.mainmenu
             self.run_display = False
         
         
